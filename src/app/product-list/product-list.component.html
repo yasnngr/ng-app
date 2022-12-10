@@ -1,0 +1,44 @@
+<div *ngIf="!loading">
+    <div *ngIf="products.length>0; else noProduct">
+        <ng-template [ngTemplateOutlet]="productList" [ngTemplateOutletContext]="{products: products}"></ng-template>
+    </div>
+</div>
+
+<ng-template #productList let-products="products">
+    <div *ngFor="let product of products"> <!--todo  Bir daha ngIf oluşturamayız halihazırda ngFor var  -->
+        <div *ngIf="product.isActive" class="card mb-3 p-1"> 
+            <div class="row">
+                <div class="col-3">
+                    <img src="/assets/images/{{product.imageUrl}}" alt="" class="img-fluid rounded-start">
+                </div>
+                <div class="col-9">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name}}</h5>
+                        
+                        <a routerLink="/products/{{product.id}}" class="btn btn-primary">Ürünü Detay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #noProduct>
+    <div class="alert alert-warning">
+        No Product
+    </div>
+</ng-template>
+
+<div *ngIf="loading" class="spinner-border text-primary" role="status">
+    <span class="sr-only"></span>
+</div>
+
+<!-- eğer productList.lengti büyükse birden o zaman göster demek ngIf ile -->
+<!-- <ul *ngIf="productList.length>2"> 
+    <li *ngFor="let p of productList"> 
+        {{p}}
+    </li>
+</ul> -->
+
+<!-- bu a-ngFor diyerek yapıyoruz. for döngüsü mantığının aynısı -->
