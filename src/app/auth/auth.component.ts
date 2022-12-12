@@ -29,7 +29,9 @@ export class AuthComponent implements OnInit {
     const password=form.value.password
 
     if(this.isLoginMode){
-      console.log('login mode...')
+      this.authService.login(email,password).subscribe(response=>{
+        console.log(response)
+      })
     }else{
       this.authService.register(email,password).subscribe(response=>{
         console.log(response)
