@@ -14,5 +14,9 @@
         <button type="submit" class="btn btn-primary" [disabled]="form.invalid">{{isLoginMode ?'Giriş Yap':'Hesap Oluştur'}}</button>
         <button type="button" class="btn btn-outline-primary" (click)="toggleMode()">{{isLoginMode?'Henüz Hesabım Yok':'Zaten Hesabım Var'}}</button>
     </div>
+
+    <div *ngIf="loading" class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+    </div>
     
 </form>
