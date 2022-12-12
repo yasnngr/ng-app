@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -15,6 +16,14 @@ export class AuthComponent implements OnInit {
 
   toggleMode(){
     this.isLoginMode=!this.isLoginMode
+  }
+
+  handleAuth(form:NgForm){
+    
+    if(!form.valid){//Böylede olur [disable] özelliği ile aynı
+      return;
+    }
+    console.log(form)
   }
 
 }
