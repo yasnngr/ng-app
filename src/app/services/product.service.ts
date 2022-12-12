@@ -15,8 +15,8 @@ export class ProductService {
             .get<Product[]>(this.url+"products.json")
             .pipe(
                 map(data=>{
+                    
                     const products:Product[]=[];
-
                     for(const key in data){
                         if(categoryId){
                             if(categoryId==data[key].categoryId){
@@ -29,14 +29,14 @@ export class ProductService {
 
                     return products
                 }),
-                delay(1000)
+                // delay(1000)
             )
     }
 
     getProductById(id:string):Observable<Product>{
         return this.http.get<Product>(this.url+"products/"+id+".json")
             .pipe(
-                delay(1000)
+                // delay(1000)
             )
     }
 
