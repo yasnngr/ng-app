@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
 import { AuthResponse } from '../models/auth-response';
 
 
@@ -20,7 +21,9 @@ export class AuthService {
       email:email,
       password:password,
       returnSecureToken:true
-    })
+    }).pipe(
+      catchError(this.handleError)
+      )
   }
 
   login(email:string,password:string){
@@ -28,6 +31,32 @@ export class AuthService {
       email:email,
       password:password,
       returnSecureToken:true
-    })
+    }).pipe(
+      catchError(this.handleError)
+      )
   }
+
+  private handleError(err:HttpErrorResponse){
+    let message="Hata Oluştu"
+
+    if(err.error.error){
+      switch(err.error.error.message){
+        case "EMAIL_EXIST":
+          message="Bu mail adresi zaten kullanılıyor."
+          break;
+        case "TOO_MANY_ATTEMPTS_TRY_LATER":
+          message="Daha sonra tekrar deneyiniz."
+          break;
+        case "EMAIL_NOT_FOUND":
+          message="Böyle bir mail adresi bulunamadı."
+          break;
+        case "INVALID_PASSWORD":
+          message="Hatalı Parola"
+          break;
+      }
+    }
+
+    return throwError(()=>message)
+  }
+
 }
