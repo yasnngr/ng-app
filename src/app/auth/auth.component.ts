@@ -13,6 +13,7 @@ export class AuthComponent implements OnInit {
 
   isLoginMode:boolean=true;
   loading=false;
+  error:string="";
 
   constructor(private authService:AuthService) { }
 
@@ -41,9 +42,38 @@ export class AuthComponent implements OnInit {
       authResponse=this.authService.register(email,password)
     }
 
-    authResponse.subscribe(response=>{
-      this.loading=false
-      console.log(response)
+    authResponse.subscribe({//arraw functionu kaldırmamız lazım=>direkt obje göndericez
+      
+      next:(result=>{//doğru bilgi girdiğinde
+        this.loading=false
+        this.error="";
+        console.log(result)
+      }),
+      error:(err=>{//yanlış bilgi girdiğinde
+        this.loading=false;
+        this.error="Hata Oluştu"
+
+        if(err.error.error){
+          switch(err.error.error.message){
+            case "EMAIL_EXIST":
+              this.error="Bu mail adresi zaten kullanılıyor."
+              break;
+            case "TOO_MANY_ATTEMPTS_TRY_LATER":
+              this.error="Daha sonra tekrar deneyiniz."
+              break;
+            case "EMAIL_NOT_FOUND":
+              this.error="Böyle bir mail adresi bulunamadı."
+              break;
+            case "INVALID_PASSWORD":
+              this.error="Hatalı Parola"
+              break;
+          }
+        }
+
+        console.log(err)
+      })
+      
+      
     })
   }
 
