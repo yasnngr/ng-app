@@ -52,10 +52,8 @@ export class AuthComponent implements OnInit {
       error:(err=>{//yanlış bilgi girdiğinde
         this.loading=false;
         this.error=err
-
         console.log(err)
       })
-      
       
     })
   }
