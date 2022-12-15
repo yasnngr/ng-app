@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthResponse } from '../models/auth-response';
 import { AuthService } from '../services/auth.service';
@@ -15,7 +16,10 @@ export class AuthComponent implements OnInit {
   loading=false;
   error:string="";
 
-  constructor(private authService:AuthService) { }
+  constructor(
+    private authService:AuthService,
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
   }
@@ -44,15 +48,14 @@ export class AuthComponent implements OnInit {
 
     authResponse.subscribe({//arraw functionu kaldırmamız lazım=>direkt obje göndericez
       
-      next:(result=>{//doğru bilgi girdiğinde
+      next:(()=>{//doğru bilgi girdiğinde
         this.loading=false
         this.error="";
-        console.log(result)
+        this.router.navigate(['/'])
       }),
       error:(err=>{//yanlış bilgi girdiğinde
         this.loading=false;
         this.error=err
-        console.log(err)
       })
       
     })

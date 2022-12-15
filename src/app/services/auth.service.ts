@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, Subject, tap, throwError } from 'rxjs';
 import { AuthResponse } from '../models/auth-response';
 import { User } from '../models/user';
 
@@ -14,6 +14,7 @@ import { User } from '../models/user';
 export class AuthService {
 
   api_key="AIzaSyB1CRclhPatrWY0md177uqvlGscEpxKsGY"
+  user=new Subject<User>()
   
   constructor(private http:HttpClient) { }
 
@@ -32,7 +33,7 @@ export class AuthService {
           response.idToken,
           expirationDate
         )
-        console.log(user)
+        this.user.next(user)
       }),
       catchError(this.handleError)
       )
@@ -53,7 +54,7 @@ export class AuthService {
           response.idToken,
           expirationDate
         )
-        console.log(user)
+        this.user.next(user)
       }),
       catchError(this.handleError)
       )
@@ -81,5 +82,6 @@ export class AuthService {
 
     return throwError(()=>message)
   }
+
 
 }
