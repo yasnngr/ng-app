@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 import { ProductService } from './services/product.service';
 
 @Component({
@@ -10,18 +11,15 @@ import { ProductService } from './services/product.service';
   styleUrls: ['./app.component.css'],// bir kaç tane daha css dosyası virgüllerle ekleyebilirsin
   providers: [ProductService]
 })
-export class AppComponent {
-  private title = 'Home Page';
+export class AppComponent implements OnInit {
 
-  constructor(
-    private http:HttpClient,
-    private productService:ProductService
-    ){
+  constructor(private authService:AuthService){
 
   }
 
-  getTitle(){
-    return this.title
+  ngOnInit(): void {
+    this.authService.autoLogin()
   }
+
 
 }
