@@ -2,8 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
+//! projenin geliştirme aşamasında burası çalışır
+
 export const environment = {
-  production: false
+  production: false,
+  adminEmail:"yasnngr@gmail.com",
+  api_key:"AIzaSyB1CRclhPatrWY0md177uqvlGscEpxKsGY",
+  database_url:"https://ng-shopapp-7aba9-default-rtdb.europe-west1.firebasedatabase.app/"
 };
 
 /*
