@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { delay, exhaustMap, map, Observable, take, tap } from "rxjs";
 import { Product } from "./product.model";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../authentication/auth.service";
 
 //locale service
 @Injectable()

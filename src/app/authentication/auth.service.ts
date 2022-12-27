@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Subject, tap, throwError } from 'rxjs';
-import { AuthResponse } from '../models/auth-response';
-import { User } from '../models/user';
+import { AuthResponse } from './auth-response.model';
+import { User } from './user.model';
 
 
 
