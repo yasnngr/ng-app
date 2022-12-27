@@ -11,7 +11,7 @@ import { AuthenticationModule } from "../authentication/authentication.module";
 
 const routes:Routes=[
     { 
-    path:"products",
+    path:"",
     children:[
         {path:'create',component:ProductCreateComponent,canActivate:[AdminGuard]},
         {path:'',component:ProductListComponent},
