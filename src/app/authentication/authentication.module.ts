@@ -3,10 +3,12 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { AuthComponent } from "./auth/auth.component";
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @NgModule({
     declarations:[
-        AuthComponent
+        AuthComponent,
+        ForgetPasswordComponent
 
     ],
     imports:[
@@ -14,7 +16,9 @@ import { AuthComponent } from "./auth/auth.component";
         FormsModule,
         RouterModule,
         RouterModule.forChild([
-            {path:'auth', component:AuthComponent}
+            {path:'auth/login', component:AuthComponent},
+            {path:'auth/register', component:AuthComponent},
+            {path:'forgetPassword',component:ForgetPasswordComponent}
         ])
     ],
     exports:[

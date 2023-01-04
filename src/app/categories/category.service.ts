@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable,map } from 'rxjs';
+import { Observable,map, take, tap, exhaustMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../authentication/auth.service';
 import { Category } from './category.model';
 
 @Injectable()
@@ -9,7 +10,10 @@ export class CategoryService {
 
   private url=environment.database_url;
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private authService:AuthService
+    ) { }
   
   getCategories():Observable<Category[]>{
     
@@ -29,6 +33,13 @@ export class CategoryService {
   }
   
   createCategory(category:Category):Observable<Category>{
-    return this.http.post<Category>(this.url + "categories.json",category)
+    return this.authService.user.pipe(
+      take(1),
+      exhaustMap(user=>{
+          return this.http.post<Category>(this.url + "categories.json?auth="+user?.token,category)
+      })
+  );
+    
+    
   }
 }

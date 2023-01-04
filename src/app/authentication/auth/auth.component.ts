@@ -22,10 +22,20 @@ export class AuthComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    if(this.router.url=="/auth/login"){
+      this.isLoginMode=true
+    }else if(this.router.url=="/auth/register"){
+      this.isLoginMode=false
+    }
   }
 
   toggleMode(){
-    this.isLoginMode=!this.isLoginMode
+     this.isLoginMode=!this.isLoginMode
+     if(this.isLoginMode){
+       this.router.navigate(['/auth/login'])
+     }else{
+       this.router.navigate(['/auth/register'])
+     }
   }
 
   handleAuth(form:NgForm){

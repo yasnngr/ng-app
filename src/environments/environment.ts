@@ -7,9 +7,10 @@
 
 export const environment = {
   production: false,
-  adminEmail:"yasnngr@gmail.com",
+  adminEmail:"derlerrryasin@gmail.com",
   api_key:"AIzaSyB1CRclhPatrWY0md177uqvlGscEpxKsGY",
-  database_url:"https://ng-shopapp-7aba9-default-rtdb.europe-west1.firebasedatabase.app/"
+  database_url:"https://ng-shopapp-7aba9-default-rtdb.europe-west1.firebasedatabase.app/",
+  storageBucket:"gs://ng-shopapp-7aba9.appspot.com/"
 };
 
 /*
